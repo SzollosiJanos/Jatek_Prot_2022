@@ -2,7 +2,7 @@
 
 ## 2. csoport tagjai:
 > - Szöllősi János (BC6X4X)
-> - Molnár Balázs (NEPTUN????)
+> - Molnár Balázs (KFIXBJ)
 > - Kertész Márton (NEPTUN????)
 
 ## Feladat leírás:
