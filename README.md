@@ -8,7 +8,7 @@
 ## Feladat leírás:
 > - Alap, mindenki által ismert sakk játék extrákkal.
 > - A sakk játék teljes mértékben saját kódból készül, nincs semmi külső kód felhasználva.
-> - A játék javascriptben készül Phaser segítségével[www.phaser.io](https://phaser.io).
+> - A játék javascriptben készül Phaser segítségével([www.phaser.io])(https://phaser.io).
 
 ## Alap/minimális elvárások
 > - **Alap sakk szabályzat:** *A bábúk lépéseinek szabályaitól kezdve a bonyolultabb lépésekig minden(Rosálás, en passant).*
