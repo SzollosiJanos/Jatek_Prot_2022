@@ -7,7 +7,7 @@
 
 ## Feladat leírás:
 > - Alap, mindenki által ismert sakk játék extrákkal.
-> - A sakk játék teljes mértékben saját kódból készül, nincs semmi külső kód felhasználva.
+> - A sakk játék teljes mértékben saját kódból készül, nincs semmi külső kód felhasználva(pl: chess.js,chessboard.js).
 > - A játék javascriptben készül Phaser segítségével -> [www.phaser.io](https://phaser.io).
 
 ## Alap/minimális elvárások
