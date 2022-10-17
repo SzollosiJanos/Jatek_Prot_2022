@@ -19,10 +19,6 @@ TO DO LIST
 
 
 overlay
-csiko
-futo
-kiraly
-kiralyno
 sakk
 sakk matt
 hangok
