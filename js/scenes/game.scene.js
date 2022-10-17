@@ -261,26 +261,408 @@ gameScene.checkMovement = function (place, mode) {
             }
             break;
         case 'futo':
+            allowmovement = true;
+            if (this.isClear(place.px, place.py) == 0) {
+                if ((place.px == this.pickedpiece.pieceX || place.py == this.pickedpiece.pieceY)) {
+                    allowmovement = false;
+                }
+                if ((Math.abs(this.pickedpiece.pieceY - place.py) != Math.abs(this.pickedpiece.pieceX - place.px))) {
+                    allowmovement = false;
+                }
+
+                if (place.py > this.pickedpiece.pieceY) {
+                    if (place.px > this.pickedpiece.pieceX) {
+                        for (i = 0; i < place.py - this.pickedpiece.pieceY; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX + i + 1, this.pickedpiece.pieceY + i + 1) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    } else {
+                        for (i = 0; i < place.py - this.pickedpiece.pieceY; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX - i - 1, this.pickedpiece.pieceY + i + 1) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    }
+                } else {
+                    if (place.px > this.pickedpiece.pieceX) {
+                        for (i = 0; i < this.pickedpiece.pieceY - place.py; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX + i + 1, this.pickedpiece.pieceY - i - 1) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    } else {
+                        for (i = 0; i < this.pickedpiece.pieceY - place.py; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX - i - 1, this.pickedpiece.pieceY - i - 1) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    }
+                }
+
+
+            } else if (this.isClear(place.px, place.py) == 2) {
+                allowdestroy = true;
+                if (place.px == this.pickedpiece.pieceX || place.py == this.pickedpiece.pieceY) {
+                    allowmovement = false;
+                    allowdestroy = false;
+                }
+
+                if (place.py > this.pickedpiece.pieceY) {
+                    if (place.x > this.pickedpiece.pieceX) {
+                        for (i = 1; i < place.py - this.pickedpiece.pieceY; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX + i, this.pickedpiece.pieceY + i) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    } else {
+                        for (i = 1; i < place.py - this.pickedpiece.pieceY; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX - i, this.pickedpiece.pieceY + i) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    }
+                } else {
+                    if (place.x > this.pickedpiece.pieceX) {
+                        for (i = 1; i < this.pickedpiece.pieceY - place.py; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX + i, this.pickedpiece.pieceY - i) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    } else {
+                        for (i = 1; i < this.pickedpiece.pieceY - place.py; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX - i, this.pickedpiece.pieceY - i) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    }
+                }
+            } else {
+                allowmovement = false;
+            }
             break;
         case 'kiralyno':
-            break;
-        case 'csiko':
+            allowmovement = true;
+            if (this.isClear(place.px, place.py) == 0) {
+                if (place.px != this.pickedpiece.pieceX && place.py != this.pickedpiece.pieceY) {
+                    allowmovement = false;
+                }
+                if (place.px == this.pickedpiece.pieceX) {
+                    if (place.py > this.pickedpiece.pieceY) {
+                        for (i = 0; i < place.py - this.pickedpiece.pieceY; i++) {
+                            if (this.isClear(place.px, this.pickedpiece.pieceY + i + 1) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    } else {
+                        for (i = 0; i < this.pickedpiece.pieceY - place.py; i++) {
+                            if (this.isClear(place.px, this.pickedpiece.pieceY - i - 1) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    }
+                } else {
+                    if (place.px > this.pickedpiece.pieceX) {
+                        for (i = 0; i < place.px - this.pickedpiece.pieceX; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX + i + 1, place.py) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    } else {
+                        for (i = 0; i < this.pickedpiece.pieceX - place.px; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX - i - 1, place.py) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    }
+                }
+            } else if (this.isClear(place.px, place.py) == 2) {
+                allowdestroy = true;
+                if (place.px != this.pickedpiece.pieceX && place.py != this.pickedpiece.pieceY) {
+                    allowmovement = false;
+                    allowdestroy = false;
+                }
+                if (place.px == this.pickedpiece.pieceX) {
+                    if (place.py > this.pickedpiece.pieceY) {
+                        for (i = 1; i < place.py - this.pickedpiece.pieceY; i++) {
+                            if (this.isClear(place.px, this.pickedpiece.pieceY + i) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    } else {
+                        for (i = 1; i < this.pickedpiece.pieceY - place.py; i++) {
+                            if (this.isClear(place.px, this.pickedpiece.pieceY - i) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    }
+                } else {
+                    if (place.px > this.pickedpiece.pieceX) {
+                        for (i = 1; i < place.px - this.pickedpiece.pieceX; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX + i, place.py) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    } else {
+                        for (i = 1; i < this.pickedpiece.pieceX - place.px; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX - i, place.py) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    }
+                }
+            } else {
+                allowmovement = false;
+            }
+            if (allowmovement || allowdestroy) {
+                break;
+            }
+            allowmovement = true;
+            if (this.isClear(place.px, place.py) == 0) {
+                if ((place.px == this.pickedpiece.pieceX || place.py == this.pickedpiece.pieceY)) {
+                    allowmovement = false;
+                }
+                if ((Math.abs(this.pickedpiece.pieceY - place.py) != Math.abs(this.pickedpiece.pieceX - place.px))) {
+                    allowmovement = false;
+                }
+
+                if (place.py > this.pickedpiece.pieceY) {
+                    if (place.px > this.pickedpiece.pieceX) {
+                        for (i = 0; i < place.py - this.pickedpiece.pieceY; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX + i + 1, this.pickedpiece.pieceY + i + 1) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    } else {
+                        for (i = 0; i < place.py - this.pickedpiece.pieceY; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX - i - 1, this.pickedpiece.pieceY + i + 1) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    }
+                } else {
+                    if (place.px > this.pickedpiece.pieceX) {
+                        for (i = 0; i < this.pickedpiece.pieceY - place.py; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX + i + 1, this.pickedpiece.pieceY - i - 1) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    } else {
+                        for (i = 0; i < this.pickedpiece.pieceY - place.py; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX - i - 1, this.pickedpiece.pieceY - i - 1) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    }
+                }
+
+
+            } else if (this.isClear(place.px, place.py) == 2) {
+                allowdestroy = true;
+                if (place.px == this.pickedpiece.pieceX || place.py == this.pickedpiece.pieceY) {
+                    allowmovement = false;
+                    allowdestroy = false;
+                }
+
+                if (place.py > this.pickedpiece.pieceY) {
+                    if (place.x > this.pickedpiece.pieceX) {
+                        for (i = 1; i < place.py - this.pickedpiece.pieceY; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX + i, this.pickedpiece.pieceY + i) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    } else {
+                        for (i = 1; i < place.py - this.pickedpiece.pieceY; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX - i, this.pickedpiece.pieceY + i) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    }
+                } else {
+                    if (place.x > this.pickedpiece.pieceX) {
+                        for (i = 1; i < this.pickedpiece.pieceY - place.py; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX + i, this.pickedpiece.pieceY - i) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    } else {
+                        for (i = 1; i < this.pickedpiece.pieceY - place.py; i++) {
+                            if (this.isClear(this.pickedpiece.pieceX - i, this.pickedpiece.pieceY - i) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    }
+                }
+            } else {
+                allowmovement = false;
+            }
             break;
         case 'kiraly':
+            allowmovement = true;
+            if (Math.abs(this.pickedpiece.pieceX - place.px) > 1 || Math.abs(this.pickedpiece.pieceY - place.py) > 1) {
+                allowmovement = false;
+                allowdestroy = false;
+                break;
+            }
+            if (this.isClear(place.px, place.py) == 0) {
+                if (place.px != this.pickedpiece.pieceX && place.py != this.pickedpiece.pieceY) {
+                    allowmovement = false;
+                }
+                if (place.px == this.pickedpiece.pieceX) {
+                    if (place.py > this.pickedpiece.pieceY) {
+                        if (this.isClear(place.px, this.pickedpiece.pieceY + 1) != 0) {
+                            allowmovement = false;
+                        }
+                    } else {
+                        if (this.isClear(place.px, this.pickedpiece.pieceY - 1) != 0) {
+                            allowmovement = false;
+                        }
+                    }
+                } else {
+                    if (place.px > this.pickedpiece.pieceX) {
+                        if (this.isClear(this.pickedpiece.pieceX + i, place.py) != 0) {
+                            allowmovement = false;
+                        }
+                    } else {
+                        if (this.isClear(this.pickedpiece.pieceX - i, place.py) != 0) {
+                            allowmovement = false;
+                        }
+                    }
+                }
+            } else if (this.isClear(place.px, place.py) == 2) {
+                allowdestroy = true;
+                if (place.px != this.pickedpiece.pieceX && place.py != this.pickedpiece.pieceY) {
+                    allowmovement = false;
+                    allowdestroy = false;
+                }
+                if (place.px == this.pickedpiece.pieceX) {
+                    if (place.py > this.pickedpiece.pieceY) {
+                        if (this.isClear(place.px, this.pickedpiece.pieceY + 1) != 0) {
+                            allowmovement = false;
+                        }
+                    } else {
+                        if (this.isClear(place.px, this.pickedpiece.pieceY - 1) != 0) {
+                            allowmovement = false;
+                        }
+                    }
+                } else {
+                    if (place.px > this.pickedpiece.pieceX) {
+                        if (this.isClear(this.pickedpiece.pieceX + 1, place.py) != 0) {
+                            allowmovement = false;
+                        }
+                    } else {
+                        if (this.isClear(this.pickedpiece.pieceX - 1, place.py) != 0) {
+                            allowmovement = false;
+                        }
+                    }
+                }
+            } else {
+                allowmovement = false;
+            }
+            if (allowmovement || allowdestroy) {
+                break;
+            }
+            allowmovement = true;
+            if (this.isClear(place.px, place.py) == 0) {
+                if ((place.px == this.pickedpiece.pieceX || place.py == this.pickedpiece.pieceY)) {
+                    allowmovement = false;
+                }
+                if ((Math.abs(this.pickedpiece.pieceY - place.py) != Math.abs(this.pickedpiece.pieceX - place.px))) {
+                    allowmovement = false;
+                }
+
+                if (place.py > this.pickedpiece.pieceY) {
+                    if (place.px > this.pickedpiece.pieceX) {
+                        if (this.isClear(this.pickedpiece.pieceX + 1, this.pickedpiece.pieceY + 1) != 0) {
+                            allowmovement = false;
+                        }
+                    } else {
+                        if (this.isClear(this.pickedpiece.pieceX - 1, this.pickedpiece.pieceY + 1) != 0) {
+                            allowmovement = false;
+                        }
+                    }
+                } else {
+                    if (place.px > this.pickedpiece.pieceX) {
+                        if (this.isClear(this.pickedpiece.pieceX + 1, this.pickedpiece.pieceY - 1) != 0) {
+                            allowmovement = false;
+                        }
+                    } else {
+                        if (this.isClear(this.pickedpiece.pieceX - 1, this.pickedpiece.pieceY - 1) != 0) {
+                            allowmovement = false;
+                        }
+                    }
+                }
+
+
+            } else if (this.isClear(place.px, place.py) == 2) {
+                allowdestroy = true;
+                if (place.px == this.pickedpiece.pieceX || place.py == this.pickedpiece.pieceY) {
+                    allowmovement = false;
+                    allowdestroy = false;
+                }
+
+                if (place.py > this.pickedpiece.pieceY) {
+                    if (place.x > this.pickedpiece.pieceX) {
+                        if (this.isClear(this.pickedpiece.pieceX + 1, this.pickedpiece.pieceY + 1) != 0) {
+                            allowmovement = false;
+                        } else {
+                            if (this.isClear(this.pickedpiece.pieceX - 1, this.pickedpiece.pieceY + 1) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    } else {
+                        if (place.x > this.pickedpiece.pieceX) {
+                            if (this.isClear(this.pickedpiece.pieceX + 1, this.pickedpiece.pieceY - 1) != 0) {
+                                allowmovement = false;
+                            }
+                        } else {
+                            if (this.isClear(this.pickedpiece.pieceX - 1, this.pickedpiece.pieceY - 1) != 0) {
+                                allowmovement = false;
+                            }
+                        }
+                    }
+                } else {
+                    allowmovement = false;
+                }
+
+            }
+            break;
+        case 'csiko':
+            allowmovement = true;
+            if(this.isClear(place.px,place.py)==0){
+                if(Math.abs(this.pickedpiece.pieceX-place.px)+Math.abs(this.pickedpiece.pieceY-place.py)!=3){
+                    allowmovement = false;
+                }
+                if(this.pickedpiece.pieceX==place.px || this.pickedpiece.pieceY==place.py){
+                    allowmovement = false;
+                }
+            }else if(this.isClear(place.px,place.py)==2){
+                allowdestroy=true;
+                if(Math.abs(this.pickedpiece.pieceX-place.px)+Math.abs(this.pickedpiece.pieceY-place.py)!=3){
+                    allowmovement = false;
+                    allowdestroy = false;
+                }
+                if(this.pickedpiece.pieceX==place.px || this.pickedpiece.pieceY==place.py){
+                    allowmovement = false;
+                    allowdestroy = false;
+                }
+            }else {
+                allowmovement = false;
+            }
             break;
     }
     if (allowmovement && allowdestroy == false && mode == 1) {
         this.pickedpiece.alreadyMoved = true;
-        this.pickedpiece.x = (place.px - 1) * (config.width/8) + (config.width/8) / 2;
-        this.pickedpiece.y = (place.py - 1) * (config.width/8) + (config.width/8) / 2;
+        this.pickedpiece.x = (place.px - 1) * (config.width / 8) + (config.width / 8) / 2;
+        this.pickedpiece.y = (place.py - 1) * (config.width / 8) + (config.width / 8) / 2;
         this.pickedpiece.pieceX = place.px;
         this.pickedpiece.pieceY = place.py;
         this.pickpiece(this.pickedpiece);
         this.switchPlayer();
     } else if (allowdestroy && mode == 1) {
         this.pickedpiece.alreadyMoved = true;
-        this.pickedpiece.x = (place.px - 1) * (config.width/8) + (config.width/8) / 2;
-        this.pickedpiece.y = (place.py - 1) * (config.width/8) + (config.width/8) / 2;
+        this.pickedpiece.x = (place.px - 1) * (config.width / 8) + (config.width / 8) / 2;
+        this.pickedpiece.y = (place.py - 1) * (config.width / 8) + (config.width / 8) / 2;
         this.pickedpiece.pieceX = place.px;
         this.pickedpiece.pieceY = place.py;
         this.destroypiece.destroy();
@@ -350,9 +732,9 @@ gameScene.createBg = function () {
         let newbg;
 
         for (k = 0; k < 4; k++) {
-            newbg = this.add.sprite(((i) % 2) * (config.width/8) + ((config.width/8) * 2 * k), 0 + i * (config.width/8), 'background1').setOrigin(0, 0);
-            newbg.scaleX = 1 - (1-((config.width/8)/1024));
-            newbg.scaleY = 1 - (1-((config.width/8)/1024));
+            newbg = this.add.sprite(((i) % 2) * (config.width / 8) + ((config.width / 8) * 2 * k), 0 + i * (config.width / 8), 'background1').setOrigin(0, 0);
+            newbg.scaleX = 1 - (1 - ((config.width / 8) / 1024));
+            newbg.scaleY = 1 - (1 - ((config.width / 8) / 1024));
             newbg.px = k * 2 + 2;
             if (((-1) ** i) == 1) {
                 newbg.px--;
@@ -363,9 +745,9 @@ gameScene.createBg = function () {
         }
 
         for (k = 0; k < 4; k++) {
-            newbg = this.add.sprite(((i + 1) % 2) * (config.width/8) + ((config.width/8) * 2 * k), 0 + i * (config.width/8), 'background2').setOrigin(0, 0);
-            newbg.scaleX = 1 - (1-((config.width/8)/1024));
-            newbg.scaleY = 1 - (1-((config.width/8)/1024));
+            newbg = this.add.sprite(((i + 1) % 2) * (config.width / 8) + ((config.width / 8) * 2 * k), 0 + i * (config.width / 8), 'background2').setOrigin(0, 0);
+            newbg.scaleX = 1 - (1 - ((config.width / 8) / 1024));
+            newbg.scaleY = 1 - (1 - ((config.width / 8) / 1024));
             newbg.px = k * 2 + 1;
             if (((-1) ** i) == 1) {
                 newbg.px++;
@@ -374,14 +756,14 @@ gameScene.createBg = function () {
             newbg.setInteractive();
             this.bg.add(newbg);
         }
-        this.text = this.add.text(10, (config.width/8) / 2 + (config.width/8) * i, i + 1, {
-            font: 30*(config.width/750)+'px Arial',
+        this.text = this.add.text(10, (config.width / 8) / 2 + (config.width / 8) * i, i + 1, {
+            font: 30 * (config.width / 750) + 'px Arial',
             fill: '#ff0000'
         });
         this.text.setOrigin(0.5);
         this.text.setDepth(5);
-        this.text = this.add.text((config.width/8) / 2 + (config.width/8) * i, (config.width/8) * 8 - 10, String.fromCharCode('A'.charCodeAt(0) + i), {
-            font: 30*(config.width/750)+'px Arial',
+        this.text = this.add.text((config.width / 8) / 2 + (config.width / 8) * i, (config.width / 8) * 8 - 10, String.fromCharCode('A'.charCodeAt(0) + i), {
+            font: 30 * (config.width / 750) + 'px Arial',
             fill: '#ff0000'
         });
         this.text.setOrigin(0.5);
@@ -394,10 +776,10 @@ gameScene.restartgame = function () {
     let newpiece;
     let k = 0;
     for (i = 0; i < 8; i++) {
-        newpiece = this.add.sprite((config.width/8) / 2 + i * (config.width/8), (config.width/8) / 2 + (config.width/8), 'Bparaszt');
+        newpiece = this.add.sprite((config.width / 8) / 2 + i * (config.width / 8), (config.width / 8) / 2 + (config.width / 8), 'Bparaszt');
 
-        newpiece.scaleX = 1 - (1-((config.width/8)/1024));
-        newpiece.scaleY = 1 - (1-((config.width/8)/1024));
+        newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
+        newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
         newpiece.pieceX = i + 1;
         newpiece.pieceY = 2;
         newpiece.color = 0;
@@ -406,10 +788,10 @@ gameScene.restartgame = function () {
         this.pieces_black.add(newpiece);
     }
     for (i = 0; i < 8; i++) {
-        newpiece = this.add.sprite((config.width/8) / 2 + i * (config.width/8), (config.width/8) / 2 + (config.width/8) * 6, 'Wparaszt');
+        newpiece = this.add.sprite((config.width / 8) / 2 + i * (config.width / 8), (config.width / 8) / 2 + (config.width / 8) * 6, 'Wparaszt');
 
-        newpiece.scaleX = 1 - (1-((config.width/8)/1024));
-        newpiece.scaleY = 1 - (1-((config.width/8)/1024));
+        newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
+        newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
         newpiece.pieceX = i + 1;
         newpiece.pieceY = 7;
         newpiece.color = 1;
@@ -418,10 +800,10 @@ gameScene.restartgame = function () {
         this.pieces_white.add(newpiece);
     }
     for (i = 0; i < 2; i++) {
-        newpiece = this.add.sprite((config.width/8) / 2 + (i * (config.width/8) * (7 - k * 2)) + (config.width/8) * k, (config.width/8) / 2, 'Bbastya');
+        newpiece = this.add.sprite((config.width / 8) / 2 + (i * (config.width / 8) * (7 - k * 2)) + (config.width / 8) * k, (config.width / 8) / 2, 'Bbastya');
 
-        newpiece.scaleX = 1 - (1-((config.width/8)/1024));
-        newpiece.scaleY = 1 - (1-((config.width/8)/1024));
+        newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
+        newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
         newpiece.pieceX = i * (7 - k * 2) + 1;
         newpiece.pieceY = 1;
         newpiece.color = 0;
@@ -430,10 +812,10 @@ gameScene.restartgame = function () {
         this.pieces_black.add(newpiece);
     }
     for (i = 0; i < 2; i++) {
-        newpiece = this.add.sprite((config.width/8) / 2 + (i * (config.width/8) * (7 - k * 2)) + (config.width/8) * k, (config.width/8) / 2 + 7 * (config.width/8), 'Wbastya');
+        newpiece = this.add.sprite((config.width / 8) / 2 + (i * (config.width / 8) * (7 - k * 2)) + (config.width / 8) * k, (config.width / 8) / 2 + 7 * (config.width / 8), 'Wbastya');
 
-        newpiece.scaleX = 1 - (1-((config.width/8)/1024));
-        newpiece.scaleY = 1 - (1-((config.width/8)/1024));
+        newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
+        newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
         newpiece.pieceX = i * (7 - k * 2) + 1;
         newpiece.pieceY = 8;
         newpiece.color = 1;
@@ -443,10 +825,10 @@ gameScene.restartgame = function () {
     }
     k++;
     for (i = 0; i < 2; i++) {
-        newpiece = this.add.sprite((config.width/8) / 2 + (i * (config.width/8) * (7 - k * 2)) + (config.width/8) * k, (config.width/8) / 2, 'Bcsiko');
+        newpiece = this.add.sprite((config.width / 8) / 2 + (i * (config.width / 8) * (7 - k * 2)) + (config.width / 8) * k, (config.width / 8) / 2, 'Bcsiko');
 
-        newpiece.scaleX = 1 - (1-((config.width/8)/1024));
-        newpiece.scaleY = 1 - (1-((config.width/8)/1024));
+        newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
+        newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
         newpiece.pieceX = i * (7 - k * 2) + 2;
         newpiece.pieceY = 1;
         newpiece.color = 0;
@@ -454,10 +836,10 @@ gameScene.restartgame = function () {
         this.pieces_black.add(newpiece);
     }
     for (i = 0; i < 2; i++) {
-        newpiece = this.add.sprite((config.width/8) / 2 + (i * (config.width/8) * (7 - k * 2)) + (config.width/8) * k, (config.width/8) / 2 + 7 * (config.width/8), 'Wcsiko');
+        newpiece = this.add.sprite((config.width / 8) / 2 + (i * (config.width / 8) * (7 - k * 2)) + (config.width / 8) * k, (config.width / 8) / 2 + 7 * (config.width / 8), 'Wcsiko');
 
-        newpiece.scaleX = 1 - (1-((config.width/8)/1024));
-        newpiece.scaleY = 1 - (1-((config.width/8)/1024));
+        newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
+        newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
         newpiece.pieceX = i * (7 - k * 2) + 2;
         newpiece.pieceY = 8;
         newpiece.color = 1;
@@ -466,10 +848,10 @@ gameScene.restartgame = function () {
     }
     k++;
     for (i = 0; i < 2; i++) {
-        newpiece = this.add.sprite((config.width/8) / 2 + (i * (config.width/8) * (7 - k * 2)) + (config.width/8) * k, (config.width/8) / 2, 'Bfuto');
+        newpiece = this.add.sprite((config.width / 8) / 2 + (i * (config.width / 8) * (7 - k * 2)) + (config.width / 8) * k, (config.width / 8) / 2, 'Bfuto');
 
-        newpiece.scaleX = 1 - (1-((config.width/8)/1024));
-        newpiece.scaleY = 1 - (1-((config.width/8)/1024));
+        newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
+        newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
         newpiece.pieceX = i * (7 - k * 2) + 3;
         newpiece.pieceY = 1;
         newpiece.color = 0;
@@ -477,10 +859,10 @@ gameScene.restartgame = function () {
         this.pieces_black.add(newpiece);
     }
     for (i = 0; i < 2; i++) {
-        newpiece = this.add.sprite((config.width/8) / 2 + (i * (config.width/8) * (7 - k * 2)) + (config.width/8) * k, (config.width/8) / 2 + 7 * (config.width/8), 'Wfuto');
+        newpiece = this.add.sprite((config.width / 8) / 2 + (i * (config.width / 8) * (7 - k * 2)) + (config.width / 8) * k, (config.width / 8) / 2 + 7 * (config.width / 8), 'Wfuto');
 
-        newpiece.scaleX = 1 - (1-((config.width/8)/1024));
-        newpiece.scaleY = 1 - (1-((config.width/8)/1024));
+        newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
+        newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
         newpiece.pieceX = i * (7 - k * 2) + 3;
         newpiece.pieceY = 8;
         newpiece.color = 1;
@@ -488,20 +870,20 @@ gameScene.restartgame = function () {
         this.pieces_white.add(newpiece);
     }
     k++;
-    newpiece = this.add.sprite((config.width/8) / 2 + (i * (config.width/8) * (7 - k * 2)) + (config.width/8), (config.width/8) / 2, 'Bkiraly');
+    newpiece = this.add.sprite((config.width / 8) / 2 + (i * (config.width / 8) * (7 - k * 2)) + (config.width / 8), (config.width / 8) / 2, 'Bkiraly');
 
-    newpiece.scaleX = 1 - (1-((config.width/8)/1024));
-    newpiece.scaleY = 1 - (1-((config.width/8)/1024));
+    newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
+    newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
     newpiece.pieceX = 4;
     newpiece.pieceY = 1;
     newpiece.color = 0;
     newpiece.type = 'kiraly';
     newpiece.alreadyMoved = false;
     this.pieces_black.add(newpiece);
-    newpiece = this.add.sprite((config.width/8) / 2 + (i * (config.width/8) * (7 - k * 2)) + (config.width/8) * 2, (config.width/8) / 2 + 7 * (config.width/8), 'Wkiraly');
+    newpiece = this.add.sprite((config.width / 8) / 2 + (i * (config.width / 8) * (7 - k * 2)) + (config.width / 8) * 2, (config.width / 8) / 2 + 7 * (config.width / 8), 'Wkiraly');
 
-    newpiece.scaleX = 1 - (1-((config.width/8)/1024));
-    newpiece.scaleY = 1 - (1-((config.width/8)/1024));
+    newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
+    newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
     newpiece.pieceX = 5;
     newpiece.pieceY = 8;
     newpiece.color = 1;
@@ -509,19 +891,19 @@ gameScene.restartgame = function () {
     newpiece.alreadyMoved = false;
     this.pieces_white.add(newpiece);
     k++;
-    newpiece = this.add.sprite((config.width/8) / 2 + (config.width/8) * k, (config.width/8) / 2, 'Bkiralyno');
+    newpiece = this.add.sprite((config.width / 8) / 2 + (config.width / 8) * k, (config.width / 8) / 2, 'Bkiralyno');
 
-    newpiece.scaleX = 1 - (1-((config.width/8)/1024));
-    newpiece.scaleY = 1 - (1-((config.width/8)/1024));
+    newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
+    newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
     newpiece.pieceX = 5;
     newpiece.pieceY = 1;
     newpiece.color = 0;
     newpiece.type = 'kiralyno';
     this.pieces_black.add(newpiece);
-    newpiece = this.add.sprite((config.width/8) / 2 + (config.width/8) * (k - 1), (config.width/8) / 2 + 7 * (config.width/8), 'Wkiralyno');
+    newpiece = this.add.sprite((config.width / 8) / 2 + (config.width / 8) * (k - 1), (config.width / 8) / 2 + 7 * (config.width / 8), 'Wkiralyno');
 
-    newpiece.scaleX = 1 - (1-((config.width/8)/1024));
-    newpiece.scaleY = 1 - (1-((config.width/8)/1024));
+    newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
+    newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
     newpiece.pieceX = 4;
     newpiece.pieceY = 8;
     newpiece.color = 1;
