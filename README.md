@@ -3,7 +3,7 @@
 ## 2. csoport tagjai:
 > - Szöllősi János (BC6X4X)
 > - Molnár Balázs (KFIXBJ)
-> - Kertész Márton (NEPTUN????)
+> - Kertész Márton (BIL5PY)
 
 ## Feladat leírás:
 > - Alap, mindenki által ismert sakk játék extrákkal.
