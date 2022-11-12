@@ -4,8 +4,8 @@ loadingScene.preload = function () {
     this.load.image('background1', 'assets/tile1.png');
     this.load.image('background2', 'assets/tile2.png');
     this.load.image('overlay', 'assets/overlay.png');
-    this.load.image('Wparaszt', 'assets/paraszt_white.png');
-    this.load.image('Bparaszt', 'assets/paraszt_black.png');
+    // this.load.image('Wparaszt', 'assets/paraszt_white.png');
+    // this.load.image('Bparaszt', 'assets/paraszt_black.png');
     this.load.image('Wfuto', 'assets/futo_white.png');
     this.load.image('Bfuto', 'assets/futo_black.png');
     this.load.image('Wkiraly', 'assets/king_white.png');
