@@ -16,33 +16,28 @@ loadingScene.preload = function () {
     this.load.image('Bcsiko', 'assets/csiko_black.png');
     this.load.image('Wbastya', 'assets/bastya_white.png');
     this.load.image('Bbastya', 'assets/bastya_black.png');
-    this.createPieces();
-    const barW = 500;
-    const barH = 30;
-    const gameW = this.sys.game.config.width;
-    const gameH = this.sys.game.config.height;
+    this.barW = 500;
+    this.barH = 30;
+    this.gameW = this.sys.game.config.width;
+    this.gameH = this.sys.game.config.height;
 
     this.barBg = this.add.graphics();
     this.barBg.fillStyle(0x000000, 0.3);
     this.barBg.fillRect(
-        gameW / 2 - barW / 2,
-        gameH / 2 - barH / 2,
-        barW,
-        barH
+        this.gameW / 2 - this.barW / 2,
+        this.gameH / 2 - this.barH / 2,
+        this.barW,
+        this.barH
     );
-
     this.progressBar = this.add.graphics();
-
+    this.progressBar_progress = 0;
+    this.newprogressbar();
     this.load.on('progress', (progress) => {
-        this.progressBar.clear();
-        this.progressBar.fillStyle(0x28D139, 1);
-        this.progressBar.fillRect(
-            gameW / 2 - barW / 2,
-            gameH / 2 - barH / 2,
-            progress * barW,
-            barH
-        );
+        this.newprogressbar();
     });
+
+    
+    this.createPieces();
 };
 
 
@@ -60,7 +55,7 @@ loadingScene.createPieces = function() {
     bParasztGraphics.fillCircle(512, 190, 120);
     bParasztGraphics.strokePath();
     bParasztGraphics.generateTexture('Bparaszt', 1024, 1024);
-
+    this.newprogressbar();
     const wParasztGraphics = this.make.graphics({x: 0, y: 0, add: false});
     wParasztGraphics.lineStyle(30, 0x000000, 1.0);
     wParasztGraphics.fillStyle(0xFFFFFF, 1.0);
@@ -74,7 +69,21 @@ loadingScene.createPieces = function() {
     wParasztGraphics.fillCircle(512, 190, 120);
     wParasztGraphics.strokePath();
     wParasztGraphics.generateTexture('Wparaszt', 1024, 1024);
+    this.newprogressbar();
 }
+
+loadingScene.newprogressbar = function(){
+    this.progressBar.clear();
+    this.progressBar.fillStyle(0x28D139, 1);
+    this.progressBar.fillRect(
+        this.gameW / 2 - this.barW / 2,
+        this.gameH / 2 - this.barH / 2,
+            (this.progressBar_progress/15) * this.barW,
+            this.barH
+    )
+    this.progressBar_progress++;
+};
+
 
 loadingScene.create = function () {
     this.scene.start('Home');
