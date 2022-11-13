@@ -13,9 +13,6 @@ gameScene.create = function () {
     this.pieces_black = this.add.group();
     this.pieces_white = this.add.group();
 
-    // bábuk megrajzolása
-    this.createPieces();
-
     this.overlay = this.add.group();
 
     this.restartgame();
@@ -774,36 +771,6 @@ gameScene.createBg = function () {
     }
 }
 
-
-gameScene.createPieces = function() {
-    const bParasztGraphics = this.make.graphics({x: 0, y: 0, add: false});
-    bParasztGraphics.lineStyle(30, 0xFFFFFF, 1.0);
-    bParasztGraphics.fillStyle(0x000000, 1.0);
-    bParasztGraphics.beginPath();
-    bParasztGraphics.arc(512, 952, 400, 0, Math.PI, true);
-    bParasztGraphics.closePath();
-    bParasztGraphics.fillPath();
-    bParasztGraphics.strokePath();
-    bParasztGraphics.fillCircle(512, 450, 230);
-    bParasztGraphics.strokePath();
-    bParasztGraphics.fillCircle(512, 190, 120);
-    bParasztGraphics.strokePath();
-    bParasztGraphics.generateTexture('Bparaszt', 1024, 1024);
-
-    const wParasztGraphics = this.make.graphics({x: 0, y: 0, add: false});
-    wParasztGraphics.lineStyle(30, 0x000000, 1.0);
-    wParasztGraphics.fillStyle(0xFFFFFF, 1.0);
-    wParasztGraphics.beginPath();
-    wParasztGraphics.arc(512, 952, 400, 0, Math.PI, true);
-    wParasztGraphics.closePath();
-    wParasztGraphics.fillPath();
-    wParasztGraphics.strokePath();
-    wParasztGraphics.fillCircle(512, 450, 230);
-    wParasztGraphics.strokePath();
-    wParasztGraphics.fillCircle(512, 190, 120);
-    wParasztGraphics.strokePath();
-    wParasztGraphics.generateTexture('Wparaszt', 1024, 1024);
-}
 
 
 gameScene.restartgame = function () {
