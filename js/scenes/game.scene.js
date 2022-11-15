@@ -232,12 +232,14 @@ gameScene.checkMovement = function (place, mode) {
                         for (i = 1; i < place.py - this.pickedpiece.pieceY; i++) {
                             if (this.isClear(place.px, this.pickedpiece.pieceY + i) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     } else {
                         for (i = 1; i < this.pickedpiece.pieceY - place.py; i++) {
                             if (this.isClear(place.px, this.pickedpiece.pieceY - i) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     }
@@ -246,18 +248,21 @@ gameScene.checkMovement = function (place, mode) {
                         for (i = 1; i < place.px - this.pickedpiece.pieceX; i++) {
                             if (this.isClear(this.pickedpiece.pieceX + i, place.py) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     } else {
                         for (i = 1; i < this.pickedpiece.pieceX - place.px; i++) {
                             if (this.isClear(this.pickedpiece.pieceX - i, place.py) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     }
                 }
             } else {
                 allowmovement = false;
+                allowdestroy = false;
             }
             break;
         case 'futo':
@@ -309,30 +314,34 @@ gameScene.checkMovement = function (place, mode) {
                 }
 
                 if (place.py > this.pickedpiece.pieceY) {
-                    if (place.x > this.pickedpiece.pieceX) {
+                    if (place.px > this.pickedpiece.pieceX) {
                         for (i = 1; i < place.py - this.pickedpiece.pieceY; i++) {
                             if (this.isClear(this.pickedpiece.pieceX + i, this.pickedpiece.pieceY + i) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     } else {
                         for (i = 1; i < place.py - this.pickedpiece.pieceY; i++) {
                             if (this.isClear(this.pickedpiece.pieceX - i, this.pickedpiece.pieceY + i) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     }
                 } else {
-                    if (place.x > this.pickedpiece.pieceX) {
+                    if (place.px > this.pickedpiece.pieceX) {
                         for (i = 1; i < this.pickedpiece.pieceY - place.py; i++) {
                             if (this.isClear(this.pickedpiece.pieceX + i, this.pickedpiece.pieceY - i) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     } else {
                         for (i = 1; i < this.pickedpiece.pieceY - place.py; i++) {
                             if (this.isClear(this.pickedpiece.pieceX - i, this.pickedpiece.pieceY - i) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     }
@@ -387,12 +396,14 @@ gameScene.checkMovement = function (place, mode) {
                         for (i = 1; i < place.py - this.pickedpiece.pieceY; i++) {
                             if (this.isClear(place.px, this.pickedpiece.pieceY + i) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     } else {
                         for (i = 1; i < this.pickedpiece.pieceY - place.py; i++) {
                             if (this.isClear(place.px, this.pickedpiece.pieceY - i) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     }
@@ -401,12 +412,14 @@ gameScene.checkMovement = function (place, mode) {
                         for (i = 1; i < place.px - this.pickedpiece.pieceX; i++) {
                             if (this.isClear(this.pickedpiece.pieceX + i, place.py) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     } else {
                         for (i = 1; i < this.pickedpiece.pieceX - place.px; i++) {
                             if (this.isClear(this.pickedpiece.pieceX - i, place.py) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     }
@@ -465,36 +478,41 @@ gameScene.checkMovement = function (place, mode) {
                 }
 
                 if (place.py > this.pickedpiece.pieceY) {
-                    if (place.x > this.pickedpiece.pieceX) {
+                    if (place.px > this.pickedpiece.pieceX) {
                         for (i = 1; i < place.py - this.pickedpiece.pieceY; i++) {
                             if (this.isClear(this.pickedpiece.pieceX + i, this.pickedpiece.pieceY + i) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     } else {
                         for (i = 1; i < place.py - this.pickedpiece.pieceY; i++) {
                             if (this.isClear(this.pickedpiece.pieceX - i, this.pickedpiece.pieceY + i) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     }
                 } else {
-                    if (place.x > this.pickedpiece.pieceX) {
+                    if (place.px > this.pickedpiece.pieceX) {
                         for (i = 1; i < this.pickedpiece.pieceY - place.py; i++) {
                             if (this.isClear(this.pickedpiece.pieceX + i, this.pickedpiece.pieceY - i) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     } else {
                         for (i = 1; i < this.pickedpiece.pieceY - place.py; i++) {
                             if (this.isClear(this.pickedpiece.pieceX - i, this.pickedpiece.pieceY - i) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     }
                 }
             } else {
                 allowmovement = false;
+                allowdestroy = false;
             }
             break;
         case 'kiraly':
@@ -539,25 +557,30 @@ gameScene.checkMovement = function (place, mode) {
                     if (place.py > this.pickedpiece.pieceY) {
                         if (this.isClear(place.px, this.pickedpiece.pieceY + 1) != 0) {
                             allowmovement = false;
+                            allowdestroy = false;
                         }
                     } else {
                         if (this.isClear(place.px, this.pickedpiece.pieceY - 1) != 0) {
                             allowmovement = false;
+                            allowdestroy = false;
                         }
                     }
                 } else {
                     if (place.px > this.pickedpiece.pieceX) {
                         if (this.isClear(this.pickedpiece.pieceX + 1, place.py) != 0) {
                             allowmovement = false;
+                            allowdestroy = false;
                         }
                     } else {
                         if (this.isClear(this.pickedpiece.pieceX - 1, place.py) != 0) {
                             allowmovement = false;
+                            allowdestroy = false;
                         }
                     }
                 }
             } else {
                 allowmovement = false;
+                allowdestroy = false;
             }
             if (allowmovement || allowdestroy) {
                 break;
@@ -602,27 +625,32 @@ gameScene.checkMovement = function (place, mode) {
                 }
 
                 if (place.py > this.pickedpiece.pieceY) {
-                    if (place.x > this.pickedpiece.pieceX) {
+                    if (place.px > this.pickedpiece.pieceX) {
                         if (this.isClear(this.pickedpiece.pieceX + 1, this.pickedpiece.pieceY + 1) != 0) {
                             allowmovement = false;
+                            allowdestroy = false;
                         } else {
                             if (this.isClear(this.pickedpiece.pieceX - 1, this.pickedpiece.pieceY + 1) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     } else {
-                        if (place.x > this.pickedpiece.pieceX) {
+                        if (place.px > this.pickedpiece.pieceX) {
                             if (this.isClear(this.pickedpiece.pieceX + 1, this.pickedpiece.pieceY - 1) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         } else {
                             if (this.isClear(this.pickedpiece.pieceX - 1, this.pickedpiece.pieceY - 1) != 0) {
                                 allowmovement = false;
+                                allowdestroy = false;
                             }
                         }
                     }
                 } else {
                     allowmovement = false;
+                    allowdestroy = false;
                 }
 
             }
@@ -648,6 +676,7 @@ gameScene.checkMovement = function (place, mode) {
                 }
             }else {
                 allowmovement = false;
+                allowdestroy = false;
             }
             break;
     }
