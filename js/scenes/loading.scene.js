@@ -8,8 +8,8 @@ loadingScene.preload = function () {
     // this.load.image('Bparaszt', 'assets/paraszt_black.png');
     this.load.image('Wfuto', 'assets/futo_white.png');
     this.load.image('Bfuto', 'assets/futo_black.png');
-    this.load.image('Wkiraly', 'assets/king_white.png');
-    this.load.image('Bkiraly', 'assets/king_black.png');
+    // this.load.image('Wkiraly', 'assets/king_white.png');
+    // this.load.image('Bkiraly', 'assets/king_black.png');
     this.load.image('Wkiralyno', 'assets/kiralyno_white.png');
     this.load.image('Bkiralyno', 'assets/kiralyno_black.png');
     this.load.image('Wcsiko', 'assets/csiko_white.png');
@@ -64,6 +64,16 @@ loadingScene.createPieces = function() {
     drawPiece(piece, 'bastya');
     piece.generateTexture('Wbastya', 1024, 1024);
     this.newprogressbar();
+
+    piece = this.newBlackPiece();
+    drawPiece(piece, 'kiraly');
+    piece.generateTexture('Bkiraly', 1200, 1200);
+    this.newprogressbar();
+
+    piece = this.newWhitePiece();
+    drawPiece(piece, 'kiraly');
+    piece.generateTexture('Wkiraly', 1200, 1200);
+    this.newprogressbar();
 };
 
 
@@ -92,6 +102,8 @@ loadingScene.newWhitePiece = function() {
 
 
 function drawPiece(piece, type) {
+    let path;
+
     switch(type) {
         case 'paraszt':
             piece.beginPath();
@@ -148,7 +160,81 @@ function drawPiece(piece, type) {
             piece.fillPath();
             piece.strokePath();
             break;
+
+        case 'kiraly':
+            // draw cross
+            path = new Phaser.Curves.Path();
+            path.moveTo(575, 400);
+            path.lineTo(575, 150);
+            path.lineTo(500, 150);
+            path.lineTo(500, 100);
+            path.lineTo(575, 100);
+            path.lineTo(575, 25);
+            path.lineTo(625, 25);
+            path.lineTo(625, 100);
+            path.lineTo(700, 100);
+            path.lineTo(700, 150);
+            path.lineTo(625, 150);
+            path.lineTo(625, 400);
+            piece.fillPoints(path.getPoints());
+            piece.strokePath();
+
+            // draw middle bump
+            path = new Phaser.Curves.Path();
+            addQuadBezier(path, 375, 550, 600, -150, 825, 550);
+            piece.fillPoints(path.getPoints());
+            piece.strokePath();
+
+            // draw side bumps
+            path = new Phaser.Curves.Path();
+            path.moveTo(600, 800);
+            path.lineTo(600, 550);
+            addQuadBezier(path, 600, 550, 375, 175, 150, 325);
+            addQuadBezier(path, 150, 325, -75, 475, 300, 760);
+            piece.fillPoints(path.getPoints());
+            piece.strokePath();
+
+            path = new Phaser.Curves.Path();
+            path.moveTo(600, 800);
+            path.lineTo(600, 550);
+            addQuadBezier(path, 600, 550, 825, 175, 1050, 325);
+            addQuadBezier(path, 1050, 325, 1275, 475, 900, 760);
+            piece.fillPoints(path.getPoints());
+            piece.strokePath();
+
+            // draw bottom rings
+            path = new Phaser.Curves.Path();
+            path.moveTo(300, 880);
+            path.lineTo(300, 760);
+            addQuadBezier(path, 300, 760, 600, 610, 900, 760);
+            path.lineTo(900, 880);
+            piece.fillPoints(path.getPoints());
+            piece.strokePath();
+
+            path = new Phaser.Curves.Path();
+            path.moveTo(300, 1000);
+            path.lineTo(300, 880);
+            addQuadBezier(path, 300, 880, 600, 730, 900, 880);
+            path.lineTo(900, 1000);
+            piece.fillPoints(path.getPoints());
+            piece.strokePath();
+
+            path = new Phaser.Curves.Path();
+            addQuadBezier(path, 300, 1000, 600, 1150, 900, 1000);
+            addQuadBezier(path, 900, 1000, 600, 850, 300, 1000);
+            piece.fillPoints(path.getPoints());
+            piece.strokePath();
+
+            break;
     }
+}
+
+
+function addQuadBezier(path, p0X, p0Y, p1X, p1Y, p2X, p2Y) {
+    const p0 = new Phaser.Math.Vector2(p0X, p0Y);
+    const p1 = new Phaser.Math.Vector2(p1X, p1Y);
+    const p2 = new Phaser.Math.Vector2(p2X, p2Y);
+    path.add(new Phaser.Curves.QuadraticBezier(p0, p1, p2));
 }
 
 
