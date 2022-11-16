@@ -923,10 +923,12 @@ gameScene.restartgame = function () {
     newpiece.alreadyMoved = false;
     this.pieces_white.add(newpiece);
     k++;
+
+    const KIRALYNO_GRAPHICS_CORRECTION = 0.8;
     newpiece = this.add.sprite((config.width / 8) / 2 + (config.width / 8) * k, (config.width / 8) / 2, 'Bkiralyno');
 
-    newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
-    newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
+    newpiece.scaleX = (1 - (1 - ((config.width / 8) / 1024))) * KIRALYNO_GRAPHICS_CORRECTION;
+    newpiece.scaleY = (1 - (1 - ((config.width / 8) / 1024))) * KIRALYNO_GRAPHICS_CORRECTION;
     newpiece.pieceX = 5;
     newpiece.pieceY = 1;
     newpiece.color = 0;
@@ -934,8 +936,8 @@ gameScene.restartgame = function () {
     this.pieces_black.add(newpiece);
     newpiece = this.add.sprite((config.width / 8) / 2 + (config.width / 8) * (k - 1), (config.width / 8) / 2 + 7 * (config.width / 8), 'Wkiralyno');
 
-    newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
-    newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
+    newpiece.scaleX = (1 - (1 - ((config.width / 8) / 1024))) * KIRALYNO_GRAPHICS_CORRECTION;
+    newpiece.scaleY = (1 - (1 - ((config.width / 8) / 1024))) * KIRALYNO_GRAPHICS_CORRECTION;
     newpiece.pieceX = 4;
     newpiece.pieceY = 8;
     newpiece.color = 1;

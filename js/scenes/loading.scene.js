@@ -4,18 +4,10 @@ loadingScene.preload = function () {
     this.load.image('background1', 'assets/tile1.png');
     this.load.image('background2', 'assets/tile2.png');
     this.load.image('overlay', 'assets/overlay.png');
-    // this.load.image('Wparaszt', 'assets/paraszt_white.png');
-    // this.load.image('Bparaszt', 'assets/paraszt_black.png');
     this.load.image('Wfuto', 'assets/futo_white.png');
     this.load.image('Bfuto', 'assets/futo_black.png');
-    // this.load.image('Wkiraly', 'assets/king_white.png');
-    // this.load.image('Bkiraly', 'assets/king_black.png');
-    this.load.image('Wkiralyno', 'assets/kiralyno_white.png');
-    this.load.image('Bkiralyno', 'assets/kiralyno_black.png');
     this.load.image('Wcsiko', 'assets/csiko_white.png');
     this.load.image('Bcsiko', 'assets/csiko_black.png');
-    // this.load.image('Wbastya', 'assets/bastya_white.png');
-    // this.load.image('Bbastya', 'assets/bastya_black.png');
 
     this.barW = 500;
     this.barH = 30;
@@ -73,6 +65,16 @@ loadingScene.createPieces = function() {
     piece = this.newWhitePiece();
     drawPiece(piece, 'kiraly');
     piece.generateTexture('Wkiraly', 1200, 1200);
+    this.newprogressbar();
+
+    piece = this.newBlackPiece();
+    drawPiece(piece, 'kiralyno');
+    piece.generateTexture('Bkiralyno', 1200, 1200);
+    this.newprogressbar();
+
+    piece = this.newWhitePiece();
+    drawPiece(piece, 'kiralyno');
+    piece.generateTexture('Wkiralyno', 1200, 1200);
     this.newprogressbar();
 };
 
@@ -200,6 +202,70 @@ function drawPiece(piece, type) {
             addQuadBezier(path, 600, 550, 825, 175, 1050, 325);
             addQuadBezier(path, 1050, 325, 1275, 475, 900, 760);
             piece.fillPoints(path.getPoints());
+            piece.strokePath();
+
+            // draw bottom rings
+            path = new Phaser.Curves.Path();
+            path.moveTo(300, 880);
+            path.lineTo(300, 760);
+            addQuadBezier(path, 300, 760, 600, 610, 900, 760);
+            path.lineTo(900, 880);
+            piece.fillPoints(path.getPoints());
+            piece.strokePath();
+
+            path = new Phaser.Curves.Path();
+            path.moveTo(300, 1000);
+            path.lineTo(300, 880);
+            addQuadBezier(path, 300, 880, 600, 730, 900, 880);
+            path.lineTo(900, 1000);
+            piece.fillPoints(path.getPoints());
+            piece.strokePath();
+
+            path = new Phaser.Curves.Path();
+            addQuadBezier(path, 300, 1000, 600, 1150, 900, 1000);
+            addQuadBezier(path, 900, 1000, 600, 850, 300, 1000);
+            piece.fillPoints(path.getPoints());
+            piece.strokePath();
+
+            break;
+
+        case 'kiralyno':
+            // draw spikes
+            piece.beginPath();
+            piece.moveTo(300, 760);
+            piece.lineTo(200, 400);
+            piece.lineTo(400, 750);
+            piece.lineTo(400, 350);
+            piece.lineTo(500, 700);
+            piece.fillPath();
+            piece.strokePath();
+
+            piece.beginPath();
+            piece.moveTo(550, 700);
+            piece.lineTo(600, 300);
+            piece.lineTo(650, 700);
+            piece.fillPath();
+            piece.strokePath();
+
+            piece.beginPath();
+            piece.moveTo(900, 760);
+            piece.lineTo(1000, 400);
+            piece.lineTo(800, 750);
+            piece.lineTo(800, 350);
+            piece.lineTo(700, 700);
+            piece.fillPath();
+            piece.strokePath();
+
+            // draw pearls
+            piece.fillCircle(180, 350, 50);
+            piece.strokePath();
+            piece.fillCircle(390, 300, 50);
+            piece.strokePath();
+            piece.fillCircle(600, 250, 50);
+            piece.strokePath();
+            piece.fillCircle(1020, 350, 50);
+            piece.strokePath();
+            piece.fillCircle(810, 300, 50);
             piece.strokePath();
 
             // draw bottom rings
