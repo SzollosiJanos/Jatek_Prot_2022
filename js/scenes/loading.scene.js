@@ -6,8 +6,8 @@ loadingScene.preload = function () {
     this.load.image('overlay', 'assets/overlay.png');
     this.load.image('Wfuto', 'assets/futo_white.png');
     this.load.image('Bfuto', 'assets/futo_black.png');
-    this.load.image('Wcsiko', 'assets/csiko_white.png');
-    this.load.image('Bcsiko', 'assets/csiko_black.png');
+    // this.load.image('Wcsiko', 'assets/csiko_white.png');
+    // this.load.image('Bcsiko', 'assets/csiko_black.png');
 
     this.barW = 500;
     this.barH = 30;
@@ -75,6 +75,16 @@ loadingScene.createPieces = function() {
     piece = this.newWhitePiece();
     drawPiece(piece, 'kiralyno');
     piece.generateTexture('Wkiralyno', 1200, 1200);
+    this.newprogressbar();
+
+    piece = this.newBlackPiece();
+    drawPiece(piece, 'csiko');
+    piece.generateTexture('Bcsiko', 1200, 1200);
+    this.newprogressbar();
+
+    piece = this.newWhitePiece();
+    drawPiece(piece, 'csiko');
+    piece.generateTexture('Wcsiko', 1200, 1200);
     this.newprogressbar();
 };
 
@@ -288,6 +298,25 @@ function drawPiece(piece, type) {
             path = new Phaser.Curves.Path();
             addQuadBezier(path, 300, 1000, 600, 1150, 900, 1000);
             addQuadBezier(path, 900, 1000, 600, 850, 300, 1000);
+            piece.fillPoints(path.getPoints());
+            piece.strokePath();
+
+            break;
+
+        case 'csiko':
+            // draw outline
+            path = new Phaser.Curves.Path();
+            path.moveTo(652, 625);
+            addQuadBezier(path, 652, 625, 670, 740, 506, 856);
+            addQuadBezier(path, 506, 856, 405, 931, 421, 1011);
+            path.lineTo(961, 1010);
+            addQuadBezier(path, 961, 1010, 1003, 430, 686, 349);
+            path.lineTo(664, 267);
+            path.lineTo(599, 332);
+            addQuadBezier(path, 599, 332, 420, 408, 418, 478);
+            addQuadBezier(path, 418, 478, 415, 520, 307, 649);
+            addQuadBezier(path, 307, 649, 272, 790, 369, 782);
+            addQuadBezier(path, 369, 782, 402, 762, 409, 725);
             piece.fillPoints(path.getPoints());
             piece.strokePath();
 
