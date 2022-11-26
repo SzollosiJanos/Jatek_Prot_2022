@@ -17,16 +17,10 @@ const game = new Phaser.Game(config);
 /*
 TO DO LIST
 
-
-overlay
 sakk
 sakk matt
-hangok
 rosálás
 en passant
 paraszt átváltozás
-bábúk generálása kóddal
-bábú leütési animáció
-game over screen
-home screen
+bábú leütési animáció??
 */
