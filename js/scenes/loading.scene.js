@@ -4,8 +4,6 @@ loadingScene.preload = function () {
     this.load.image('background1', 'assets/tile1.png');
     this.load.image('background2', 'assets/tile2.png');
     this.load.image('overlay', 'assets/overlay.png');
-    this.load.image('Wfuto', 'assets/futo_white.png');
-    this.load.image('Bfuto', 'assets/futo_black.png');
 
     this.barW = 500;
     this.barH = 30;
@@ -83,6 +81,16 @@ loadingScene.createPieces = function() {
     drawPiece(piece, 'csiko');
     piece.generateTexture('Wcsiko', 1200, 1200);
     this.newprogressbar();
+
+    piece = this.newBlackPiece();
+    drawPiece(piece, 'futo');
+    piece.generateTexture('Bfuto', 1200, 1200);
+    this.newprogressbar();
+
+    piece = this.newWhitePiece();
+    drawPiece(piece, 'futo');
+    piece.generateTexture('Wfuto', 1200, 1200);
+    this.newprogressbar();
 };
 
 
@@ -124,6 +132,26 @@ function drawPiece(piece, type) {
             piece.strokePath();
             piece.fillCircle(512, 190, 120);
             piece.strokePath();
+            break;
+
+        case 'futo':
+            path = new Phaser.Curves.Path();
+            path.moveTo(230, 952);
+            addQuadBezier(path, 230, 952, 391, 600, 472, 190);
+            path.lineTo(552, 190);
+            addQuadBezier(path, 552, 190, 631, 600, 792, 952);
+            piece.fillPoints(path.getPoints());
+            piece.strokePath();
+
+            piece.beginPath();
+            piece.arc(511, 952, 300, 0, Math.PI, true);
+            piece.closePath();
+            piece.fillPath();
+            piece.strokePath();
+
+            piece.fillCircle(512, 190, 120);
+            piece.strokePath();
+
             break;
 
         case 'bastya':

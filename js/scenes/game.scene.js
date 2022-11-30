@@ -878,7 +878,7 @@ gameScene.restartgame = function () {
     }
     k++;
     for (i = 0; i < 2; i++) {
-        newpiece = this.add.sprite((config.width / 8) / 2 + (i * (config.width / 8) * (7 - k * 2)) + (config.width / 8) * k, (config.width / 8) / 2, 'Bfuto');
+        newpiece = this.add.sprite((config.width / 8) / 2 + (i * (config.width / 8) * (7 - k * 2)) + (config.width / 8) * k + 8, (config.width / 8) / 2 + 8, 'Bfuto');
 
         newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
         newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
@@ -889,7 +889,7 @@ gameScene.restartgame = function () {
         this.pieces_black.add(newpiece);
     }
     for (i = 0; i < 2; i++) {
-        newpiece = this.add.sprite((config.width / 8) / 2 + (i * (config.width / 8) * (7 - k * 2)) + (config.width / 8) * k, (config.width / 8) / 2 + 7 * (config.width / 8), 'Wfuto');
+        newpiece = this.add.sprite((config.width / 8) / 2 + (i * (config.width / 8) * (7 - k * 2)) + (config.width / 8) * k + 8, (config.width / 8) / 2 + 7 * (config.width / 8) + 8, 'Wfuto');
 
         newpiece.scaleX = 1 - (1 - ((config.width / 8) / 1024));
         newpiece.scaleY = 1 - (1 - ((config.width / 8) / 1024));
