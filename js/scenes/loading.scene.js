@@ -6,8 +6,6 @@ loadingScene.preload = function () {
     this.load.image('overlay', 'assets/overlay.png');
     this.load.image('Wfuto', 'assets/futo_white.png');
     this.load.image('Bfuto', 'assets/futo_black.png');
-    // this.load.image('Wcsiko', 'assets/csiko_white.png');
-    // this.load.image('Bcsiko', 'assets/csiko_black.png');
 
     this.barW = 500;
     this.barH = 30;
@@ -29,7 +27,6 @@ loadingScene.preload = function () {
         this.newprogressbar();
     });
 
-    
     this.createPieces();
 };
 
@@ -304,6 +301,14 @@ function drawPiece(piece, type) {
             break;
 
         case 'csiko':
+            // draw ear
+            path = new Phaser.Curves.Path();
+            path.moveTo(626, 349);
+            path.lineTo(584, 267);
+            path.lineTo(499, 382);
+            piece.fillPoints(path.getPoints());
+            piece.strokePath();
+
             // draw outline
             path = new Phaser.Curves.Path();
             path.moveTo(652, 625);
@@ -317,8 +322,14 @@ function drawPiece(piece, type) {
             addQuadBezier(path, 418, 478, 415, 520, 307, 649);
             addQuadBezier(path, 307, 649, 272, 790, 369, 782);
             addQuadBezier(path, 369, 782, 402, 762, 409, 725);
+            addQuadBezier(path, 409, 725, 402, 762, 369, 782);
+            path.lineTo(440, 800);
+            addQuadBezier(path, 440, 800, 460, 800, 655, 600);
             piece.fillPoints(path.getPoints());
             piece.strokePath();
+
+            // draw eye
+            piece.strokeCircle(500, 470, 10);
 
             break;
     }
