@@ -6,21 +6,7 @@ const config = {
     height: WINDOW_SIZE,
     backgroundColor: '#ffffff',
     pixelArt: false,
-    scene: [loadingScene, homeScene, gameScene]
+    scene: [loadingScene, gameScene]
 };
 
 const game = new Phaser.Game(config);
-
-
-
-
-/*
-TO DO LIST
-
-sakk
-sakk matt
-rosálás
-en passant
-paraszt átváltozás
-bábú leütési animáció??
-*/

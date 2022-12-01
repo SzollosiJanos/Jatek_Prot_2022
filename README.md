@@ -11,5 +11,5 @@
 > - A játék javascriptben készül Phaser segítségével -> [www.phaser.io](https://phaser.io).
 
 ## Alap/minimális elvárások
-> - **Alap sakk szabályzat:** *A bábúk lépéseinek szabályaitól kezdve a bonyolultabb lépésekig minden(Rosálás, en passant).*
+> - **Alap sakk szabályzat:** *A bábúk lépéseinek szabályai[A bonyolultabb lépések(rosálás, en passant, paraszt átváltása) nem lett befejezve csapattárs hiánya miatt.]*
 > - **Assettek:** *A játék nem használ semmilyen jellegű assettet, minden grafikát programozással érünk el(Sakk tábla, bábúk).*

@@ -94,27 +94,18 @@ loadingScene.createPieces = function() {
 loadingScene.createTiles = function() {
     const DARK_COLOR = 0x512A2A;
     const LIGHT_COLOR = 0x7C4C3E;
-    const BLACK_COLOR = 0x000000;
-    const RED_COLOR = 0xFF0000;
 
     let tile;
 
     tile = this.make.graphics({x: 0, y: 0, add: false});
-    tile.fillStyle(DARK_COLOR, 1.0);
+    tile.fillStyle(LIGHT_COLOR, 1.0);
     tile.fillRect(0, 0, 1024, 1024);
     tile.generateTexture('background1', 1024, 1024);
 
     tile = this.make.graphics({x: 0, y: 0, add: false});
-    tile.fillStyle(LIGHT_COLOR, 1.0);
+    tile.fillStyle(DARK_COLOR, 1.0);
     tile.fillRect(0, 0, 1024, 1024);
     tile.generateTexture('background2', 1024, 1024);
-
-    tile = this.make.graphics({x: 0, y: 0, add: false});
-    tile.lineStyle(120, BLACK_COLOR, 1.0);
-    tile.fillStyle(RED_COLOR, 1.0);
-    tile.fillRect(0, 0, 1024, 1024);
-    tile.strokeRect(0, 0, 1024, 1024);
-    tile.generateTexture('overlay', 1024, 1024);
 };
 
 
@@ -410,5 +401,5 @@ loadingScene.newprogressbar = function(){
 
 
 loadingScene.create = function () {
-    this.scene.start('Home');
+    this.scene.start('Game');
 };
