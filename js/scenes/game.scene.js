@@ -49,6 +49,8 @@ gameScene.create = function () {
     });
     this.switchPlayer();
 
+    this.moveSound = this.sound.add('moveSound');
+    this.hitSound = this.sound.add('hitSound');
 };
 
 
@@ -676,22 +678,41 @@ gameScene.checkMovement = function (place) {
     }
     if (allowmovement && allowdestroy == false) {
         this.pickedpiece.alreadyMoved = true;
-        this.pickedpiece.x = (place.px - 1) * (config.width / 8) + (config.width / 8) / 2;
-        this.pickedpiece.y = (place.py - 1) * (config.width / 8) + (config.width / 8) / 2;
+        this.moveSound.play();
+        this.tweens.add({
+            targets: this.pickedpiece,
+            x: (place.px - 1) * (config.width / 8) + (config.width / 8) / 2,
+            y: (place.py - 1) * (config.width / 8) + (config.width / 8) / 2,
+            duration: 300,
+            ease: 'Quint.easeInOut',
+        })
         this.pickedpiece.pieceX = place.px;
         this.pickedpiece.pieceY = place.py;
         this.pickpiece(this.pickedpiece);
         this.switchPlayer();
     } else if (allowdestroy) {
         this.pickedpiece.alreadyMoved = true;
-        this.pickedpiece.x = (place.px - 1) * (config.width / 8) + (config.width / 8) / 2;
-        this.pickedpiece.y = (place.py - 1) * (config.width / 8) + (config.width / 8) / 2;
-        this.pickedpiece.pieceX = place.px;
-        this.pickedpiece.pieceY = place.py;
-        this.destroypiece.destroy();
-        this.destroypiece = null;
-        this.pickpiece(this.pickedpiece);
-        this.switchPlayer();
+        this.pickedpiece.alpha = 0;
+        this.hitSound.play();
+        this.tweens.add({
+            targets: this.destroypiece,
+            angle: -90,
+            duration: 300,
+            ease: 'Quint.easeInOut',
+            onComplete: () => {
+                this.destroypiece.destroy();
+                this.destroypiece = null;
+
+                this.pickedpiece.alpha = 1;
+                this.pickedpiece.x = (place.px - 1) * (config.width / 8) + (config.width / 8) / 2;
+                this.pickedpiece.y = (place.py - 1) * (config.width / 8) + (config.width / 8) / 2;
+                this.pickedpiece.pieceX = place.px;
+                this.pickedpiece.pieceY = place.py;
+
+                this.pickpiece(this.pickedpiece);
+                this.switchPlayer();
+            },
+        });
     }
 
 }

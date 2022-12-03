@@ -23,6 +23,9 @@ loadingScene.preload = function () {
 
     this.createPieces();
     this.createTiles();
+
+    this.load.audio('moveSound', 'assets/audio/move.mp3');
+    this.load.audio('hitSound', 'assets/audio/hit.mp3');
 };
 
 
