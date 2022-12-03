@@ -404,5 +404,5 @@ loadingScene.newprogressbar = function(){
 
 
 loadingScene.create = function () {
-    this.scene.start('Game');
+    this.scene.start('Start');
 };
