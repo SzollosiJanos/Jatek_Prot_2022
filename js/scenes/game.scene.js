@@ -3,6 +3,7 @@ const gameScene = new Phaser.Scene('Game');
 gameScene.init = function () {
     this.pickedpiece = null;
     this.currentlyPick = 0;           //1==white          0==black
+    this.gameCreated = false;
 };
 
 gameScene.create = function () {
@@ -47,14 +48,23 @@ gameScene.create = function () {
             this.pickpiece(item);
         });
     });
+
+    this.scene.launch('Timer');
+
     this.switchPlayer();
 
     this.moveSound = this.sound.add('moveSound');
     this.hitSound = this.sound.add('hitSound');
+
+    this.gameCreated = true;
 };
 
 
 gameScene.switchPlayer = function () {
+    if (this.gameCreated) {
+        timerScene.switchPlayer();
+    }
+
     this.currentlyPick = (this.currentlyPick + 1) % 2;
     if (this.currentlyPick == 1) {
         this.pieces_black.getChildren().forEach((item, i) => {

@@ -6,7 +6,7 @@ const config = {
     height: WINDOW_SIZE,
     backgroundColor: '#ffffff',
     pixelArt: false,
-    scene: [loadingScene, startScene, gameScene]
+    scene: [loadingScene, startScene, gameScene, timerScene]
 };
 
 const game = new Phaser.Game(config);
