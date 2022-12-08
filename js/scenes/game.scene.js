@@ -735,6 +735,7 @@ gameScene.pickpiece = function (item) {
         item.scaleX -= 0.02;
         item.scaleY -= 0.02;
         this.pickedpiece = null;
+        this.removeOverlay();
         if (this.currentlyPick == 1) {
             this.pieces_white.getChildren().forEach((item2, i) => {
                 item2.on('pointerover', () => {
@@ -753,6 +754,7 @@ gameScene.pickpiece = function (item) {
             return;
         }
         this.pickedpiece = item;
+        this.showOverlay();
         item.scaleX += 0.02;
         item.scaleY += 0.02;
         if (this.currentlyPick == 1) {
@@ -783,6 +785,7 @@ gameScene.createBg = function () {
 
         for (k = 0; k < 4; k++) {
             newbg = this.add.sprite(((i) % 2) * (config.width / 8) + ((config.width / 8) * 2 * k), 0 + i * (config.width / 8), 'background1').setOrigin(0, 0);
+            newbg.originalBackgroundTexture = 'background1';
             newbg.scaleX = 1 - (1 - ((config.width / 8) / 1024));
             newbg.scaleY = 1 - (1 - ((config.width / 8) / 1024));
             newbg.px = k * 2 + 2;
@@ -796,6 +799,7 @@ gameScene.createBg = function () {
 
         for (k = 0; k < 4; k++) {
             newbg = this.add.sprite(((i + 1) % 2) * (config.width / 8) + ((config.width / 8) * 2 * k), 0 + i * (config.width / 8), 'background2').setOrigin(0, 0);
+            newbg.originalBackgroundTexture = 'background2';
             newbg.scaleX = 1 - (1 - ((config.width / 8) / 1024));
             newbg.scaleY = 1 - (1 - ((config.width / 8) / 1024));
             newbg.px = k * 2 + 1;
@@ -971,4 +975,21 @@ gameScene.restartgame = function () {
     newpiece.alreadyMoved = false;
     this.pieces_white.add(newpiece);
 
+}
+
+
+gameScene.showOverlay = function() {
+    this.bg.getChildren().forEach(square => {
+        const { allowmovement, allowdestroy } = this.checkMovement(square);
+        if (allowmovement || allowdestroy) {
+            square.setTexture('overlay');
+        }
+    });
+}
+
+
+gameScene.removeOverlay = function() {
+    this.bg.getChildren().forEach(square => {
+        square.setTexture(square.originalBackgroundTexture);
+    });
 }
