@@ -81,7 +81,8 @@ gameScene.pickplace = function (item) {
     if (this.pickedpiece == null) {
         return;
     }
-    this.checkMovement(item);
+    const { allowmovement, allowdestroy } = this.checkMovement(item);
+    this.doMovement(item, allowmovement, allowdestroy);
 }
 
 
@@ -676,6 +677,15 @@ gameScene.checkMovement = function (place) {
             }
             break;
     }
+
+    return {
+        allowmovement: allowmovement,
+        allowdestroy: allowdestroy,
+    }
+}
+
+
+gameScene.doMovement = function(place, allowmovement, allowdestroy) {
     if (allowmovement && allowdestroy == false) {
         this.pickedpiece.alreadyMoved = true;
         this.moveSound.play();
@@ -714,7 +724,6 @@ gameScene.checkMovement = function (place) {
             },
         });
     }
-
 }
 
 
