@@ -1,6 +1,6 @@
 const timerScene = new Phaser.Scene('Timer');
 
-const AVAILABLE_TIME_MS = 10 * 1000;
+const AVAILABLE_TIME_MS = 600 * 1000;
 
 function clockStr(milliseconds) {
   const seconds = Math.ceil(milliseconds / 1000);
